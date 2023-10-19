@@ -38,13 +38,26 @@ router.post('/',function(request,response){
 });
 
 router.put('/:id',function(request,response){
-    let data=student.updateStudent(request.params.id);
-    response.json(data);
+    student.updateStudent(request.params.id,request.body, function(err, data){
+        if(err){
+            response.json(err);
+        }
+        else{
+            response.send(data);
+        }
+    });
+
 });
 
 router.delete('/:id',function(request,response){
-    let data=student.deleteStudent(request.params.id);
-    response.json(data);
+    student.deleteStudent(request.params.id, function(err, data){
+        if(err){
+            response.json(err);
+        }
+        else{
+            response.send(data);
+        } 
+    });
 });
 
 module.exports=router;
